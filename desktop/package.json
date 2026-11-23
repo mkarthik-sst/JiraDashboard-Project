@@ -1,0 +1,25 @@
+{
+  "name": "cleancore-defect-hub-desktop",
+  "version": "1.0.0",
+  "description": "Offline desktop runner for CleanCore Defect Hub",
+  "main": "main.js",
+  "author": "smartShift Technologies",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win portable nsis",
+    "dist:mac": "electron-builder --mac dmg",
+    "dist:linux": "electron-builder --linux AppImage"
+  },
+  "devDependencies": { "electron": "33.2.0", "electron-builder": "25.1.8" },
+  "build": {
+    "appId": "com.smartshift.cleancore.defecthub",
+    "productName": "CleanCore Defect Hub",
+    "directories": { "output": "dist" },
+    "files": ["main.js", "package.json"],
+    "extraResources": [{ "from": "app", "to": "app-server", "filter": ["**/*"] }],
+    "win": { "target": ["portable", "nsis"] },
+    "mac": { "target": "dmg", "category": "public.app-category.productivity" },
+    "linux": { "target": "AppImage" }
+  }
+}

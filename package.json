@@ -1,0 +1,54 @@
+{
+  "name": "cleancore-defect-hub",
+  "version": "2.4.3",
+  "private": true,
+  "description": "SAP Clean Core defect ingestion, deduplication and Jira automation dashboard",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "node scripts/start.mjs",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test-mail": "node scripts/test-mail.mjs",
+    "test-drive": "node scripts/test-drive.mjs",
+    "demo-reset": "node scripts/demo-reset.mjs",
+    "reset-data": "node scripts/reset-data.mjs",
+    "desktop:prepare": "node scripts/prepare-desktop.mjs"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "1.1.2",
+    "@radix-ui/react-tabs": "1.1.1",
+    "class-variance-authority": "0.7.0",
+    "clsx": "2.1.1",
+    "exceljs": "4.4.0",
+    "jszip": "3.10.2",
+    "lucide-react": "0.454.0",
+    "mailparser": "3.7.1",
+    "next": "14.2.35",
+    "nodemailer": "6.9.16",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "smtp-server": "3.13.6",
+    "tailwind-merge": "2.5.4"
+  },
+  "devDependencies": {
+    "@types/mailparser": "3.4.5",
+    "@types/node": "20.17.6",
+    "@types/nodemailer": "6.4.17",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@types/smtp-server": "3.5.10",
+    "autoprefixer": "10.4.20",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.35",
+    "postcss": "8.4.47",
+    "tailwindcss": "3.4.14",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3",
+    "vitest": "2.1.5"
+  }
+}

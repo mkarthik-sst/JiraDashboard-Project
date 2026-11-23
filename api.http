@@ -1,0 +1,68 @@
+### VS Code REST Client (extension: humao.rest-client) - run against `npm run dev`
+@host = http://localhost:3000
+
+### Dashboard state (what the UI polls every 2s)
+GET {{host}}/api/state?since=0
+
+### Download blank template / sample test workbook
+GET {{host}}/api/template
+###
+GET {{host}}/api/template?sample=1
+
+### Approved records, searchable + paginated
+GET {{host}}/api/records?status=Approved&q=CDS&priority=High&page=1&pageSize=10&sort=ProcessedAt&dir=desc
+
+### Upload (immediate). Replace the path with your filled workbook
+POST {{host}}/api/upload
+Content-Type: multipart/form-data; boundary=X
+
+--X
+Content-Disposition: form-data; name="mode"
+
+immediate
+--X
+Content-Disposition: form-data; name="file"; filename="CleanCore_Defects_SAMPLE_5records.xlsx"
+Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+< ./samples/CleanCore_Defects_SAMPLE_5records.xlsx
+--X--
+
+### Approve a record (paste an id from /api/state -> pending[].id)
+POST {{host}}/api/records/PASTE-ID-HERE/approve
+
+### Change assignee
+POST {{host}}/api/records/PASTE-ID-HERE/reassign
+Content-Type: application/json
+
+{ "email": "senior.cfl@smartshift.com", "note": "CFL specialist needed" }
+
+### Cancel a scheduled run
+DELETE {{host}}/api/scheduled/PASTE-RUN-ID-HERE
+
+### Export master workbook (all | Approved | "In Progress" | "Changed Assignee")
+GET {{host}}/api/export?status=all
+
+### Sync status / force a sync
+GET {{host}}/api/sync
+###
+POST {{host}}/api/sync
+
+### Google Drive storage: connection test (writes state/connection-test.txt)
+POST {{host}}/api/sync/test
+
+### Google Drive storage: restore the dashboard from state/store.json in the Drive folder (replaces local store)
+POST {{host}}/api/sync/restore
+
+### Open an attachment (set = uploadId from a record's attachments[].setId)
+GET {{host}}/api/attachment?set=PASTE-SET-ID&name=st22_cast_dump.png
+
+### Cancel an entry (no Jira ticket will be created; a reason is required)
+POST {{host}}/api/records/PASTE-RECORD-ID/cancel
+Content-Type: application/json
+
+{ "reason": "Raised by mistake" }
+
+### Recurrence report by Fix / Rule ID (JSON), and as an Excel download
+GET {{host}}/api/report/recurrence
+###
+GET {{host}}/api/report/recurrence?format=xlsx

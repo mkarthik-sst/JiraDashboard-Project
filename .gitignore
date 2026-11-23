@@ -1,0 +1,15 @@
+node_modules
+.next
+data
+*.log
+desktop/app
+desktop/dist
+desktop/node_modules
+.env.local
+mail-sink
+tsconfig.tsbuildinfo
+.env
+.env.*.local
+!.env.example
+secrets/
+drive-emulator-data
